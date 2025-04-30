@@ -2,7 +2,7 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import PostsList from './features/posts/PostsList';
+import PostsList from './features/posts/postsList';
 import SinglePostPage from './features/posts/SinglePostPage';
 import EditPost from './features/posts/EditPost';
 import UsersPage from './features/users/UsersPage';
