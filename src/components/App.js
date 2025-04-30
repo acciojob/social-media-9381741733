@@ -1,36 +1,49 @@
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
-// App.js
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import PostsList from './features/posts/postsList';
-import SinglePostPage from './features/posts/SinglePostPage';
-import EditPost from './features/posts/EditPost';
-import UsersPage from './features/users/UsersPage';
-import UserPosts from './features/users/UserPosts';
-import NotificationsList from './features/notifications/NotificationsList';
-import './styles/App.css';
+import { Navbar } from './app/Navbar'
 
-const App = () => {
+import { PostsList } from './features/posts/PostsList'
+import { AddPostForm } from './features/posts/AddPostForm'
+import { EditPostForm } from './features/posts/EditPostForm'
+import { SinglePostPage } from './features/posts/SinglePostPage'
+import { UsersList } from './features/users/UsersList'
+import { UserPage } from './features/users/UserPage'
+import { NotificationsList } from './features/notifications/NotificationsList'
+
+function App() {
   return (
     <Router>
+      <Navbar />
       <div className="App">
-        <h1>GenZ</h1>
-        <nav>
-          <a href="/">Posts</a> | <a href="/users">Users</a> | <a href="/notifications">Notifications</a>
-        </nav>
-        <Routes>
-          <Route path="/" element={<PostsList />} />
-          <Route path="/posts/:postId" element={<SinglePostPage />} />
-          <Route path="/editPost/:postId" element={<EditPost />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/users/:userId" element={<UserPosts />} />
-          <Route path="/notifications" element={<NotificationsList />} />
-        </Routes>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <React.Fragment>
+                <AddPostForm />
+                <PostsList />
+              </React.Fragment>
+            )}
+          />
+          <Route exact path="/posts/:postId" component={SinglePostPage} />
+          <Route exact path="/editPost/:postId" component={EditPostForm} />
+          <Route exact path="/users" component={UsersList} />
+          <Route exact path="/users/:userId" component={UserPage} />
+          <Route exact path="/notifications" component={NotificationsList} />
+          <Redirect to="/" />
+        </Switch>
       </div>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App
 
-   
+         
